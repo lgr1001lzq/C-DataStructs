@@ -2,12 +2,12 @@
 #include<stdlib.h>
 
 #define max 10
-int halfsearch(int arr[],int s,int m);
 int main()
 {
     int n,e;
     int ement;
     int arr[max];
+    int halfsearch(int arr[],int s,int m);
     printf("请输入一组有序的数组：\n");
     for(n=0;n<max;n++)
     {
@@ -47,5 +47,5 @@ int halfsearch(int arr[],int s,int m)
             low=index+1;
         }
     }
-    return -1;
+    return 0;
 }
