@@ -1,43 +1,29 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <math.h>
-#include <time.h>
-typedef int Elemtype;
 typedef struct Node{
-    Elemtype data;
+    int data;
     struct Node *next;
 }Node;
-typedef struct Node *Linklist;
-void CrateListHead(Linklist *L,int n)
+void createLinkList(Node *head,int size)
 {
-    Linklist p;
+    Node *rear=head;
     int i;
-    srand(time(0));
-    *L=(Linklist)malloc(sizeof(Node));
-    (*L)->next = NULL;
-    for(i=0;i<n;i++)
+    for(i=0;i<size;i++)
     {
-        p=(Linklist)malloc(sizeof(Node));
-        p->data = rand()%100+1;
-        p->next=(*L)->next;
-        (*L)->next=p;
+        Node *newnode = (Node*)malloc(sizeof(Node));
+        newnode->next=NULL;
+        scanf("%d",&newnode->data);
+        rear->next=newnode;
+        rear=newnode;
     }
 }
-Elemtype GetElem(Linklist L,int i,Elemtype *e)
+void TreaveLinkList(Node *head)
 {
-    int j;
-    Linklist p;
-    p=L->next;
-    j=1;
-    while (p&&j<i)
+    Node *p=head->next;
+    while(p!=NULL)
     {
+        printf("%d\t",p->data);
         p=p->next;
-        ++j;
     }
-    if(!p||j>i)
-    {
-        return -1;
-    }
-    *e=p->data;
-    return 1;
+    putchar('\n');
 }
