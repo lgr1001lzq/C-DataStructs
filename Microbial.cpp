@@ -15,5 +15,4 @@ int main()
         }
     }
     cout<<y<<endl;
-    return 0;
 }
