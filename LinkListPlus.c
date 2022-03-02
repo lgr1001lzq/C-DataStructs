@@ -56,9 +56,9 @@ int Forwordindexof(Node *head,int data){    /*查找链表的某个结点，并返回该节点所
     return index;
 }
 
-void Isempty(Node *head){
-    Node *p=head->next;
-    if(p!=NULL){
+void Isempty(Node *head){    /*判断链表是否为空*/
+    Node *p=head->next;    /*定义头结点*/
+    if(p!=NULL){    /*头结点不为空则表明该链表不为空*/
         printf("该链表不为空！\n");
     }
     else{
@@ -67,7 +67,21 @@ void Isempty(Node *head){
 }
 
 int Insertinedxof(Node *head,int index,int data){    /*在链表的某一个结点插入元素，插入成功返回OK，否则NO*/
-
+    int i=1;
+    Node *newnode=(Node*)malloc(sizeof(Node));
+    Node *p=head->next;
+    newnode->next=NULL;
+    newnode->element=data;
+    while(p!=NULL){
+        if(i==index){
+            newnode->next=p->next;
+            p->next=newnode;
+            newnode=newnode->next;
+        }
+        i++;
+        p=p->next;
+    }
+    return OK;
 }
 
 int main()
@@ -75,8 +89,9 @@ int main()
     Node *head =(Node*)malloc(sizeof(Node));
     head->next=NULL;
     CreateLinklist(head,length);
-    Forwordindexof(head,num);
     Isempty(head);
+    Insertinedxof(head,1,18);
+    Forwordindexof(head,num);
     TraveLinklist(head);
     return 0;
 }
