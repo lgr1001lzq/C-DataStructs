@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <windows.h>
 #define OK 100
 #define NO 404
 #define length 10
@@ -18,7 +19,7 @@ int CreateLinklist(Node *head,int len){   /*´´½¨Ò»¸öĞÂµÄ¾ßÌå³¤¶ÈµÄÁ´±í£¬²¢·µ»ØÊÇ
         newnode->next=NULL; /*³õÊ¼»¯ĞÂ½¨½áµã*/
         scanf("%d",&newnode->element);
         h->next=newnode; /*½«Í·Ö¸ÕëÖ¸ÏòĞÂ½¨µÄ½áµã£¬ĞÎ³ÉÍ·½Úµã¡£*/
-        h=newnode;  /*½«Í·Ö¸ÕëÖ¸ÏòĞÂ½¨µÄ½áµã¡£*/
+        h=newnode; /*½«Í·Ö¸ÕëÖ¸ÏòĞÂ½¨µÄ½áµã¡£*/
     }
     if(h->next!=NULL){
         return OK;
@@ -84,14 +85,25 @@ int Insertinedxof(Node *head,int index,int data){    /*ÔÚÁ´±íµÄÄ³Ò»¸ö½áµã²åÈëÔªË
     return OK;
 }
 
+void deleteLinklist(Node *head){     /*É¾³ıÕû¸öÁ´±í*/
+    Node *pre;          /*¶¨ÒåÒ»¸ö½áµãÓÃÒÔ±£´æ´ıÉ¾³ı½áµã*/
+    while(head->next!=NULL){
+        pre=head->next;   /*½«Í·½áµãÖ¸Ïòpre*/
+        head->next=pre->next;    /*½«preÖ¸ÏòÍ·½áµã*/
+        free(pre);     /*ÊÍ·ÅÔ­Í·½áµã*/
+    }
+}
+
 int main()
 {
     Node *head =(Node*)malloc(sizeof(Node));
     head->next=NULL;
-    CreateLinklist(head,length);
-    Isempty(head);
-    Insertinedxof(head,2,18);
-    Forwordindexof(head,num);
-    TraveLinklist(head);
+    CreateLinklist(head,length);    /*´´½¨Á´±í*/
+    Insertinedxof(head,2,18);       /*ÔÚÁ´±íµÄµÚ¶ş¸ö½áµã´¦²åÈëÒ»¸öĞÂµÄ½áµã*/
+    Forwordindexof(head,num);       /*ÔÚÁ´±íÖĞ²éÕÒÔªËØ*/
+    TraveLinklist(head);            /*±éÀúÁ´±í*/
+    Sleep(1000);                    /*ÑÓÊ±º¯Êı*/
+    deleteLinklist(head);           /*É¾³ı½áµã*/
+    Isempty(head);                  /*ÅĞ¶ÏÁ´±íÊÇ·ñÎª¿Õ*/
     return 0;
 }
