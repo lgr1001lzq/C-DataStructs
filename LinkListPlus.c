@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <windows.h>
+
 #define OK 100
 #define NO 404
 #define length 10
