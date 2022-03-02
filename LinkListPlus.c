@@ -90,7 +90,7 @@ int main()
     head->next=NULL;
     CreateLinklist(head,length);
     Isempty(head);
-    Insertinedxof(head,1,18);
+    Insertinedxof(head,9,18);
     Forwordindexof(head,num);
     TraveLinklist(head);
     return 0;
