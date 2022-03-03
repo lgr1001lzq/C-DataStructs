@@ -71,17 +71,17 @@ void Isempty(Node *head){    /*判断链表是否为空*/
 int Insertinedxof(Node *head,int index,int data){    /*在链表的某一个结点插入元素，插入成功返回OK，否则NO*/
     int i=1;
     Node *newnode=(Node*)malloc(sizeof(Node));   /*定义一个新的结点*/
-    Node *p=head->next;    /*定义头结点*/
+    Node *p=head;    /*定义头结点*/
     newnode->next=NULL;    /*初始化新结点*/
     newnode->element=data;    /*将数据指向data*/
-    while(p!=NULL){    /*头结点不为空*/
+    while(p->next!=NULL){    /*头结点不为空*/
         if(i==index){     /*如果定位到指定的位置*/
             newnode->next=p->next;     /*将结点指向赋给新的结点*/
             p->next=newnode;     /*将新结点赋给原来结点的指向*/
             newnode=newnode->next;    /*新的结点不断向后移动*/
         }
-        i++;   /*结点位置不断向后移动*/
         p=p->next;   /*结点向后遍历*/
+        i++;   /*结点位置不断向后移动*/
     }
     return OK;
 }
@@ -95,13 +95,30 @@ void deleteLinklist(Node *head){     /*删除整个链表*/
     }
 }
 
+void deleteindexof(Node *head,int index){     /*删除链表某个位置的结点*/
+    
+}
+
+void ReverseLinklist(Node *head){
+    Node *pre=NULL;
+    Node *curr;
+    while(head->next!=NULL){
+        curr=head->next;
+        head->next=curr->next;
+        curr->next=pre;
+        pre=curr;
+    }
+    head->next=pre;
+}
+
 int main()
 {
     Node *head =(Node*)malloc(sizeof(Node));
     head->next=NULL;
     CreateLinklist(head,length);    /*创建链表*/
-    Insertinedxof(head,2,18);       /*在链表的第二个结点处插入一个新的结点*/
+    Insertinedxof(head,9,18);       /*在链表的第二个结点处插入一个新的结点*/
     Forwordindexof(head,num);       /*在链表中查找元素*/
+    ReverseLinklist(head);
     TraveLinklist(head);            /*遍历链表*/
     Sleep(1000);                    /*延时函数*/
     deleteLinklist(head);           /*删除结点*/
