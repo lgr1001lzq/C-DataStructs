@@ -4,8 +4,8 @@
 
 #define OK 100
 #define NO 404
-#define length 10
-#define num 10
+#define LENGTH 10
+#define NUM 0
 
 typedef struct Linklist{ /*定义链表的结点的数据结构体，链表的结点包含元素和指向。*/
     int element;
@@ -96,7 +96,18 @@ void deleteLinklist(Node *head){     /*删除整个链表*/
 }
 
 void deleteindexof(Node *head,int index){     /*删除链表某个位置的结点*/
-    
+    Node *now;
+    Node *p=head;
+    int i=1;
+    while(p->next!=NULL){
+        if(i==index){
+            now=p->next;
+            p->next=now->next;
+            free(now);
+        }
+        p=p->next;
+        i++;
+    }   
 }
 
 void ReverseLinklist(Node *head){
@@ -113,14 +124,15 @@ void ReverseLinklist(Node *head){
 
 int main()
 {
-    Node *head =(Node*)malloc(sizeof(Node));
-    head->next=NULL;
-    CreateLinklist(head,length);    /*创建链表*/
-    Insertinedxof(head,3,18);       /*在链表的第二个结点处插入一个新的结点*/
-    Forwordindexof(head,num);       /*在链表中查找元素*/
-    ReverseLinklist(head);
+    Node *head =(Node*)malloc(sizeof(Node));     /*为头指针分配空间*/
+    head->next=NULL;                             /*初始化头结点*/
+    CreateLinklist(head,LENGTH);    /*创建链表*/
+    Insertinedxof(head,2,111);      /*在链表的第二个结点处插入一个新的结点*/
+    ReverseLinklist(head);          /*倒置链表*/
+    deleteindexof(head,5);          /*删除链表中第5个位置的结点*/
+    Forwordindexof(head,NUM);       /*在链表中查找元素*/
     TraveLinklist(head);            /*遍历链表*/
-    Sleep(1000);                    /*延时函数*/
+    Sleep(1000);                    /*延时函数*/ 
     deleteLinklist(head);           /*删除结点*/
     Isempty(head);                  /*判断链表是否为空*/
     return 0;
