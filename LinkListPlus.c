@@ -116,7 +116,7 @@ int main()
     Node *head =(Node*)malloc(sizeof(Node));
     head->next=NULL;
     CreateLinklist(head,length);    /*创建链表*/
-    Insertinedxof(head,9,18);       /*在链表的第二个结点处插入一个新的结点*/
+    Insertinedxof(head,3,18);       /*在链表的第二个结点处插入一个新的结点*/
     Forwordindexof(head,num);       /*在链表中查找元素*/
     ReverseLinklist(head);
     TraveLinklist(head);            /*遍历链表*/
