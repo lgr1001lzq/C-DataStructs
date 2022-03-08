@@ -6,46 +6,46 @@
 
 typedef struct Node{        /*创建双向链表数据结构*/
     int data;
-    struct Node *next;
-    struct Node *before;
+    struct Node *next;      /*定义双向链表的指向下一个结点*/
+    struct Node *before;    /*定义双向链表的指向上一个结点*/
 }Node;
 
 void createBlinklist(Node *head,int len){       /*创建新的双向链表*/
-    int i;
-    Node *h=head;
+    int i;                  /*循环次数*/
+    Node *h=head;           /*头指针*/
     for(i=0;i<len;i++){
-        Node *p=(Node *)malloc(sizeof(Node));
-        p->next=NULL;
-        p->before=NULL;
-        scanf("%d",&p->data);
-        h->next=p;
-        p->before=h;
-        p->next=h->next->next;
-        h=p;
+        Node *p=(Node *)malloc(sizeof(Node));     /*为新建结点分配动态空间*/
+        p->next=NULL;                             /*初始化新建结点的指针指向*/
+        p->before=NULL;                           /*初始化新建结点的指针指向*/
+        scanf("%d",&p->data);                     /*为结点数据域输入数据*/
+        h->next=p;                                /*将头指针指向p*/
+        p->before=h;                              /*将p的上一个结点指向h*/
+        p->next=h->next->next;                    /*将p的下一个结点指向头结点的下一个结点*/
+        h=p;                                      /*将头指针指向新建结点*/
     }
 }
 
 int posordertreaveBlinklist(Node *head){        /*正序遍历链表*/
-    Node *p=head->next;
-    int len=1;
-    while(p!=NULL){
-        printf("%d\t",p->data);
-        p=p->next;
-        ++len;
+    Node *p=head->next;                         /*定义头结点*/
+    int len=1;                                  /*定义链表位置*/
+    while(p!=NULL){                             /*头结点不为NULL*/
+        printf("%d\t",p->data);                 /*输出数据域*/
+        p=p->next;                              /*结点指向向后移动*/
+        ++len;                                  /*链表位置不断增加*/
     }
-    return len;
+    return len;                                 /*返回链表的长度*/
 }
 
-void insertBlinklistindexof(Node *head,int index,int data){
-    int i=1;
-    Node *newnode=(Node *)malloc(sizeof(Node));
-    Node *h=head;
-    newnode->next=NULL;
-    newnode->before=NULL;
-    newnode->data=data;
+void insertBlinklistindexof(Node *head,int index,int data){      /*在链表的某个位置插入具体的数据*/
+    int i=1;                                                     /*链表位置参数*/
+    Node *newnode=(Node *)malloc(sizeof(Node));                  /*为新插入结点分配动态空间*/
+    Node *h=head;                                                /*头指针*/
+    newnode->next=NULL;                                          /*初始化新建结点的指针指向*/
+    newnode->before=NULL;                                        /*初始化新建结点的指针指向*/
+    newnode->data=data;                                          /*新插入结点数据域指向输入数据*/
     while(h->next!=NULL){
-        if(i==index){
-            newnode->next=h->next;
+        if(i==index){                                            /*当链表位置与待插入位置相等时*/
+            newnode->next=h->next;                               /**/
             newnode->before=h->before;
             h->next=newnode;
             newnode=newnode->next;
@@ -119,6 +119,5 @@ int main(){
     head->next=NULL;
     head->before=NULL;
     createBlinklist(head,LEN);
-    deleteBlinklist(head);
     posordertreaveBlinklist(head);
 }
