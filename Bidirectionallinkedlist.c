@@ -119,5 +119,5 @@ int main(){
     head->next=NULL;
     head->before=NULL;
     createBlinklist(head,LEN);
-    posordertreaveBlinklist(head);
+    reverseBlinklist(head);
 }
