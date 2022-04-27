@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <windows.h>
 
-#define LEN 5
+#define LEN 10
 
 typedef struct Node{        /*创建双向链表数据结构*/
     int data;
@@ -73,21 +73,19 @@ void  deleteBlinklistindexof(Node *head,int index){
 
 void reverseBlinklist(Node *head){
     Node *h=head;
-    Node *end;
-    while(1){
-        if(h->next!=NULL){
-            h=h->next;
-        }
-        if(h->next==NULL){
-            end->before=h;
-        }
-        if(end->before!=NULL){
-            printf("%d\t",end->data);
-            end=end->before;
-        }
-        if(end->before==h->before){
-            break;
-        }
+    Node *end=NULL;
+    int i=0;
+    while(h->next!=NULL){
+        h=h->next;
+        i++;
+    }
+    if(h->next==NULL){
+        end=h;
+    }
+    while(i!=0){
+        printf("%d\t",end->data);
+        end=end->before;
+        i--;
     }
 }
 
@@ -119,5 +117,7 @@ int main(){
     head->next=NULL;
     head->before=NULL;
     createBlinklist(head,LEN);
+    deleteBlinklistindexof(head,3);
+    posordertreaveBlinklist(head);
     reverseBlinklist(head);
 }
